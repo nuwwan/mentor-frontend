@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
-import Home from './pages/Home';
+import Routes from './Routes';
+import { AuthProvider } from './services/auth/AuthProvider';
 
 function App() {
   return (
-    <div>
-      <Home/>
-    </div>
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
   );
 }
 

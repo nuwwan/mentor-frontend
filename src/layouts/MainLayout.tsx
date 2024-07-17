@@ -42,7 +42,11 @@ const items: MenuItem[] = [
   getItem("Files", "9", <FileOutlined />),
 ];
 
-const MainLayout = () => {
+type PropType = {
+  children: React.ReactNode;
+};
+
+const MainLayout: React.FC<PropType> = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -78,7 +82,7 @@ const MainLayout = () => {
               borderRadius: borderRadiusLG,
             }}
           >
-            Bill is a cat.
+            {props.children}
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
