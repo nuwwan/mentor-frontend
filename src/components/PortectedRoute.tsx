@@ -7,6 +7,7 @@ const ProtectedRoute: React.FC<RouteProps> = (props: RouteProps) => {
   const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {
+    debugger;
     return <Navigate to="/login" replace />;
   }
 

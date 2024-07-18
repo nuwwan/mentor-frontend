@@ -8,8 +8,9 @@ const RegisterView: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     if (!!email && password == confirmPassword && firstname) {
+      event.preventDefault();
       UserRegister({ email, firstname, lastname, password })
         .then((success) => {
           console.log(success);

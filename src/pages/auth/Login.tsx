@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginApi } from "../../services/api/AuthApi.s";
 import { useAuth } from "../../services/auth/AuthProvider";
+import { AUTH_TOKEN_KEY } from "../../constants";
 
 const LoginView: React.FC = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const LoginView: React.FC = () => {
     if (isAuthenticated) {
       console.log("User is already authenticated. Redirecitng to User page...");
       navigate("/user");
-    } 
+    }
   }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -25,12 +26,13 @@ const LoginView: React.FC = () => {
       LoginApi(email, password)
         .then((res) => {
           // Handle successful login
-          localStorage.setItem("authToken", res.data.jwt);
+          localStorage.setItem(AUTH_TOKEN_KEY, res.data.jwt);
           console.log("user loged in successfully", res);
           setIsAuthenticated(true);
           navigate("/user");
         })
         .catch((err) => {
+          setIsAuthenticated(false);
           console.log("Error login user", err);
         });
     }
